@@ -1,1 +1,15 @@
-<div style="background-color: red; height: 100px; width: 30px;"></div>
+<link rel="stylesheet" href="prueba.css">
+
+<div>
+    <input class="entrada" type="text" [(ngModel)]="texto">
+
+    <p class="texto">
+        {{texto}}
+    </p>
+    <button class="btn" (click)="botonFuncion()">
+        {{texto}}
+    </button>
+    <div class="caja" *ngFor="let palabra of arreglo">
+            {{palabra}}
+    </div>
+</div>

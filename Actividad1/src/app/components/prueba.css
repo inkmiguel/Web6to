@@ -1,0 +1,25 @@
+.texto {
+    color: chocolate;
+}
+
+.btn {
+    background-color: blueviolet;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.entrada {
+    background-color: lightgreen;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+}
+
+.caja {
+    background-color: lightblue;
+    border-radius: 5px;
+    margin: 3px;
+    border: none;
+}
