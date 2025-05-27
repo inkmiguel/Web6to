@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class PruebaComponent {
   texto: string = 'Hola mundo';
   arreglo: string[] = new Array();
+  cheves: boolean = true;
+  status: string = 'fase1';
 
   constructor(){
     this.texto = 'Hola mundo desde Angular';
@@ -17,6 +19,14 @@ export class PruebaComponent {
   }
   botonFuncion(){
     this.texto = 'Boton presionado';
-    this.arreglo.push("Ultimo elemento")
+    // this.arreglo.push("Ultimo elemento")
+    // this.cheves = !this.cheves;
+    
+    if (this.status === 'fase2') {
+      this.status = 'fase3';
+    }
+    if (this.status === 'fase1') {
+      this.status = 'fase2';
+    }
   }
 }

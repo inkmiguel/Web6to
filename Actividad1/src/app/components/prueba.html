@@ -12,4 +12,7 @@
     <div class="caja" *ngFor="let palabra of arreglo">
             {{palabra}}
     </div>
+    <div *ngIf="cheves">
+        <img [ngClass]="{'img': status == 'fase1', 'img2': status == 'fase2', 'img3':status == 'fase3'}" src="https://i.ytimg.com/vi/FGkfKEYveGE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD44kyNDry6T-A8VXnpSeIDmF7oKg" alt="">
+    </div>
 </div>
