@@ -9,12 +9,14 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PruebaComponent } from './components/prueba';
+import { EjDosComponent } from './components/Ejercicio2/ej.dos';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PruebaComponent
+    PruebaComponent,
+    EjDosComponent
   ],
   imports: [
     BrowserModule,
@@ -26,4 +28,4 @@ import { PruebaComponent } from './components/prueba';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

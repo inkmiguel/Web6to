@@ -1,0 +1,39 @@
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#datos">
+    Abrir Formulario
+</button>
+
+<!-- Modal -->  
+ <div class="modal fade" id="datos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h1>Formulario para seleccion de pelicula</h1>
+                <button class="btn-close" id="cerrarModal" data-bs-dismiss="modal">
+                    
+                </button>
+            </div>
+            <div class="modal-body row">
+                <label class="col-form-label col-2">
+                    Pelicula
+                </label>   
+                <div class="col-10">
+                    <input type="text" class="form-control" placeholder="Titanic" [(ngModel)]="peliculaModal.titulo">
+                </div>
+                <label class="col-form-label col-2">
+                    horario
+                </label>
+                <div class="col-2">
+                    <input type="number" class="form-control" placeholder="02:00" [(ngModel)]="peliculaModal.horario">
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="registrarPelicula()">
+                    Registrar Pelicula
+                </button>
+            </div>
+        </div>
+
+    </div>     
+
+ </div>         
