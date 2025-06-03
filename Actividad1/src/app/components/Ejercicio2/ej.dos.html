@@ -63,20 +63,21 @@
                     <div class="input-group mb-3">
                         <input type="number" class="form-control" placeholder="120" aria-label="Recipient’s username"
                             aria-describedby="basic-addon2" [(ngModel)]="peliculaModal.duracion">
-                        <span class="input-group-text" id="basic-addon2">Hrs</span>
+                        <span class="input-group-text" id="basic-addon2">min</span>
                     </div>
                 </div>
                 <label class="col-form-label col-5">
                     Descripcion
                 </label>
                 <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" [(ngModel)]="peliculaModal.descripcion"></textarea>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                        [(ngModel)]="peliculaModal.descripcion"></textarea>
                     <label for="floatingTextarea">Escribe una descripcion aqui</label>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" (click)="registrarPelicula()">
+                <button class="btn btn-success" *ngIf="!peliculaModal.edicion " (click)="registrarPelicula()">
                     Registrar Pelicula
                 </button>
             </div>
@@ -85,3 +86,34 @@
     </div>
 
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col">Pelicula</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Personas</th>
+            <th scope="col">Sala</th>
+            <th scope="col">Clasificacion</th>
+            <th scope="col">Duracion</th>
+            <th scope="col">Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pelicula of lsitaPeliculas">
+            <td>
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#datos" (click)="edicionPelicula(pelicula)">
+                    Editar
+                </button>
+            </td>
+            <td>{{ pelicula.titulo }}</td>
+            <td>{{ pelicula.horario }}</td>
+            <td>{{ pelicula.personas }}</td>
+            <td>{{ pelicula.sala }}</td>
+            <td>{{ pelicula.clasificacion }}</td>
+            <td>{{ (pelicula.duracion/60).toFixed(2) }} Hrs</td>
+            <td>{{ pelicula.descripcion }}</td>
+        </tr>
+    </tbody>
+</table>

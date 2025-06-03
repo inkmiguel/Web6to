@@ -9,11 +9,18 @@ import { pelicula } from "src/app/estructuras/general";
 export class EjDosComponent {
 
     peliculaModal:pelicula = new pelicula();
+    lsitaPeliculas:pelicula[] = [];
 
     constructor(){}
 
     registrarPelicula(){
-        console.log(this.peliculaModal);
+        this.lsitaPeliculas.push(this.peliculaModal);
+        this.peliculaModal = new pelicula();
         document.getElementById("cerrarModal")?.click();
+        console.log(this.lsitaPeliculas);
+    }
+    edicionPelicula(getPelicula:pelicula){
+        this.peliculaModal = getPelicula;
+        this.peliculaModal.edicion = true;
     }
 }
