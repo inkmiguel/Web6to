@@ -1,7 +1,7 @@
 export class pelicula {
 
     titulo: string = '';
-    horario:string = '';
+    horario:number = 0;
     personas:number = 0;
     sala:string = ''; 
     clasificacion:string = ''; //tambien select de al menos 5
