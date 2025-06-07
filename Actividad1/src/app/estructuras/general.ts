@@ -1,5 +1,6 @@
 export class pelicula {
 
+    peliculaId: string = '';
     titulo: string = '';
     horario:number = 0;
     personas:number = 0;
