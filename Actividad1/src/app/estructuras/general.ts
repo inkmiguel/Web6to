@@ -13,4 +13,15 @@ export class pelicula {
     constructor(){
 
     }
-}
+
+    llenado(data: any){
+        this.peliculaId = data.peliculaId;
+        this.titulo = data.titulo;
+        this.horario = data.horario || 0;
+        this.personas = data.personas || 0;
+        this.sala = data.sala;
+        this.clasificacion = data.clasificacion;
+        this.duracion = data.duracion || 0;
+        this.descripcion = data.descripcion;
+    };
+};

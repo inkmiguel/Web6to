@@ -74,11 +74,18 @@
                         [(ngModel)]="peliculaModal.descripcion"></textarea>
                     <label for="floatingTextarea">Escribe una descripcion aqui</label>
                 </div>
+                
 
             </div>
             <div class="modal-footer">
+                <button class="btn btn-danger" (click)="eliminarPelicula(peliculaModal)">
+                    <i class="bi bi-trash3"> Eliminar Pelicula</i>
+                </button>
                 <button class="btn btn-success" *ngIf="!peliculaModal.edicion " (click)="registrarPelicula()">
                     Registrar Pelicula
+                </button>
+                <button class="btn btn-success" *ngIf="peliculaModal.edicion" (click)="editarPelicula()">
+                    Guardar cambios de pelicula
                 </button>
             </div>
         </div>
@@ -98,6 +105,7 @@
             <th scope="col">Clasificacion</th>
             <th scope="col">Duracion</th>
             <th scope="col">Descripcion</th>
+            <th scope="col">Eliminar</th> <!-- Nueva columna -->
         </tr>
     </thead>
     <tbody>
@@ -114,6 +122,11 @@
             <td>{{ pelicula.clasificacion }}</td>
             <td>{{ (pelicula.duracion/60).toFixed(2) }} Hrs</td>
             <td>{{ pelicula.descripcion }}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" (click)="eliminarPelicula(pelicula)">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

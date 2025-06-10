@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { pelicula } from "src/app/estructuras/general";
-import { Firestore, collection, collectionData, doc, query,setDoc,where } from "@angular/fire/firestore";
+import { Firestore, collection, collectionData, doc, query, setDoc, where, deleteDoc } from "@angular/fire/firestore";
 
 
 @Component({
@@ -20,19 +20,11 @@ export class EjDosComponent {
             this.listaPeliculas = new Array();
             listadoPelicula.forEach(peli => {
                 let elemento = new pelicula();
-                elemento.peliculaId = peli.peliculaId;
-                elemento.titulo = peli.titulo;
-                elemento.horario = peli.horario;
-                elemento.personas = peli.personas;
-                elemento.sala = peli.sala;
-                elemento.clasificacion = peli.clasificacion;
-                elemento.duracion = peli.duracion;
-                elemento.descripcion = peli.descripcion;
-
+                elemento.llenado(peli);
                 this.listaPeliculas.push(elemento);
 
-            })
-        })
+            });
+        });
     }
 
     registrarPelicula(){
@@ -48,7 +40,7 @@ export class EjDosComponent {
 
         this.peliculaModal.peliculaId = this.generarID(15);
 
-        let ruta = doc(this.firestore,'Pelicula',this.peliculaModal.peliculaId);
+        const ruta = doc(this.firestore,'Pelicula',this.peliculaModal.peliculaId);
         setDoc(ruta, JSON.parse(JSON.stringify(this.peliculaModal))).then(()=> {
             this.peliculaModal = new pelicula();
             document.getElementById("cerrarModal")?.click();
@@ -63,6 +55,22 @@ export class EjDosComponent {
             id += letras.charAt(Math.floor(Math.random()* totalLetras))
         }
         return id;
+    }
+
+    editarPelicula(){
+        const ruta = doc(this.firestore,'Pelicula',this.peliculaModal.peliculaId);
+        setDoc(ruta, JSON.parse(JSON.stringify(this.peliculaModal))).then(()=> {
+            this.peliculaModal = new pelicula();
+            document.getElementById("cerrarModal")?.click();
+        });
+    }
+
+    eliminarPelicula(getPelicula:pelicula){
+        const ruta = doc(this.firestore,'Pelicula',getPelicula.peliculaId);
+        deleteDoc(ruta).then(()=> {
+            this.peliculaModal = new pelicula();
+            document.getElementById("cerrarModal")?.click();
+        });
     }
 
     edicionPelicula(getPelicula:pelicula){
