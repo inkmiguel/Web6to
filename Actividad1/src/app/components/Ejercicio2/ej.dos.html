@@ -78,10 +78,10 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" (click)="eliminarPelicula(peliculaModal)">
-                    <i class="bi bi-trash3"> Eliminar Pelicula</i>
+                <button class="btn btn-danger" *ngIf="peliculaModal.edicion" (click)="eliminarPelicula(peliculaModal)">
+                    <i class="bi bi-trash3"> </i>
                 </button>
-                <button class="btn btn-success" *ngIf="!peliculaModal.edicion " (click)="registrarPelicula()">
+                <button class="btn btn-success" *ngIf="!peliculaModal.edicion" (click)="registrarPelicula()">
                     Registrar Pelicula
                 </button>
                 <button class="btn btn-success" *ngIf="peliculaModal.edicion" (click)="editarPelicula()">
@@ -100,7 +100,7 @@
             <th></th>
             <th scope="col">Pelicula</th>
             <th scope="col">Horario</th>
-            <th scope="col">Personas</th>
+            <th scope="col">Personas</th>   
             <th scope="col">Sala</th>
             <th scope="col">Clasificacion</th>
             <th scope="col">Duracion</th>

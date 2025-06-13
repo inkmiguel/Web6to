@@ -10,13 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PruebaComponent } from './components/prueba';
 import { EjDosComponent } from './components/Ejercicio2/ej.dos';
+import { Examen1Component } from './components/Examen1/script';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PruebaComponent,
-    EjDosComponent
+    EjDosComponent,
+    Examen1Component
   ],
   imports: [
     BrowserModule,
