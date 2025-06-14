@@ -8,7 +8,7 @@ import { Examen1Component } from './components/Examen1/script';
 const routes: Routes = [
   {path: '', component: PruebaComponent},
   {path: 'Formulario', component: EjDosComponent},
-  {path: 'Examen1', component: Examen1Component},
+  {path: 'Examen1', component: Examen1Component}
 ];
 
 @NgModule({

@@ -9,6 +9,7 @@ export class pelicula {
     duracion:number = 0;
     descripcion:string = '';
     edicion: boolean = false; 
+    estatus: string = 'Pendiente Revision';
 
     constructor(){
 
@@ -23,5 +24,6 @@ export class pelicula {
         this.clasificacion = data.clasificacion;
         this.duracion = data.duracion || 0;
         this.descripcion = data.descripcion;
+        this.estatus = data.estatus;        
     };
 };

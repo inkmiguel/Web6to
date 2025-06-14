@@ -1,0 +1,9 @@
+.aprobada {
+  background-color: #d4edda !important; /* Verde claro */
+  color: #155724 !important; /* Verde oscuro para texto */
+}
+
+.rechazada {
+  background-color: #f8d7da !important; /* Rojo claro */
+  color: #721c24 !important; /* Rojo oscuro para texto */
+}
