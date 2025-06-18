@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { pelicula } from "src/app/estructuras/general";
 import Swal from "sweetalert2";
-import { Firestore, collection, collectionData, doc, query, setDoc, where, deleteDoc } from "@angular/fire/firestore";
+import { Firestore, collection, collectionData, doc, query, setDoc, where, deleteDoc, orderBy } from "@angular/fire/firestore";
 
 
 @Component({
@@ -10,33 +10,23 @@ import { Firestore, collection, collectionData, doc, query, setDoc, where, delet
     styleUrls: ['./ej.dos.css']
 })
 export class EjDosComponent {
-
     peliculaModal:pelicula = new pelicula();
     listaPeliculas:pelicula[] = [];
     coleccionPelicula = collection(this.firestore,'Pelicula');
+    filtradoEstatus: string = '';
 
     constructor(private firestore: Firestore){
-        let consulta = query(this.coleccionPelicula);
-        collectionData(consulta).subscribe((listadoPelicula)=> {
-            this.listaPeliculas = new Array();
-            listadoPelicula.forEach(peli => {
-                let elemento = new pelicula();
-                elemento.llenado(peli);
-                this.listaPeliculas.push(elemento);
-
-            });
-        });
+        this.limpiarFiltro();
     }
-
     registrarPelicula(){
         if(!this.validarCamposVacios()){
             this.invocarAlertaNulos();
             return;
         }
-        if(!this.validarHorario()){
+        if(!this.validarPersonas()){
             return;
         }
-        if(!this.validarPersonas()){
+        if(!this.validarDuracion()){
             return;
         }
 
@@ -49,7 +39,6 @@ export class EjDosComponent {
             this.invocarAlertaSuccess(); // Ahora la alerta se muestra después de guardar
         });
     }
-
     generarID(tamaño:number){
         let letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
         let id = '';
@@ -59,8 +48,17 @@ export class EjDosComponent {
         }
         return id;
     }
-
     editarPelicula(){
+        if(!this.validarCamposVacios()){
+            this.invocarAlertaNulos();
+        return;
+        }
+        if(!this.validarPersonas()){
+            return;
+        }
+        if(!this.validarDuracion()){
+            return;
+        }
         const ruta = doc(this.firestore,'Pelicula',this.peliculaModal.peliculaId);
         setDoc(ruta, JSON.parse(JSON.stringify(this.peliculaModal))).then(()=> {
             this.peliculaModal = new pelicula();
@@ -68,7 +66,6 @@ export class EjDosComponent {
             this.invocarAlertaSuccess();
         });
     }
-
     eliminarPelicula(getPelicula:pelicula){
         const ruta = doc(this.firestore,'Pelicula',getPelicula.peliculaId);
         deleteDoc(ruta).then(()=> {
@@ -76,7 +73,6 @@ export class EjDosComponent {
             document.getElementById("cerrarModal")?.click();
         });
     }
-
     abrirFormulario(){
         this.peliculaModal= new pelicula();
     }
@@ -85,25 +81,42 @@ export class EjDosComponent {
         this.peliculaModal = getPelicula;
         this.peliculaModal.edicion = true;
     }
+    filtrarPeliculas(){
+        const filtro = query(
+            this.coleccionPelicula,
+            where('estatus', '==', this.filtradoEstatus),
+            orderBy('titulo', 'asc')
+        );
+        collectionData(filtro).subscribe((listadoPelicula) => {
+            this.listaPeliculas = new Array();
+            listadoPelicula.forEach(peli => {
+                let elemento = new pelicula();
+                elemento.llenado(peli);
+                this.listaPeliculas.push(elemento);
+            });
+        });
+    }
+    limpiarFiltro(){
+        const consulta = query(this.coleccionPelicula, orderBy('titulo', 'asc'));
+        collectionData(consulta).subscribe((listadoPelicula)=> {
+            this.listaPeliculas = new Array();
+            listadoPelicula.forEach(peli => {
+                let elemento = new pelicula();
+                elemento.llenado(peli);
+                this.listaPeliculas.push(elemento);
+
+            });
+        });
+    }
     validarCamposVacios():boolean{
         if(this.peliculaModal.titulo.trim() === '' ||
             this.peliculaModal.horario === null ||
             this.peliculaModal.personas === 0 ||
             this.peliculaModal.sala.trim() === '' ||
             this.peliculaModal.clasificacion.trim() === '' ||
-            this.peliculaModal.duracion === 0)
+            this.peliculaModal.duracion === 0
+        )
             return false;
-        return true;
-    }
-    validarHorario():boolean{
-        if (this.peliculaModal.horario < 0 || this.peliculaModal.horario > 24){
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'El horario debe estar entre 0 y 24 horas.',
-            });
-            return false;
-        }
         return true;
     }
     validarPersonas():boolean{
@@ -112,6 +125,17 @@ export class EjDosComponent {
                 icon: 'error',
                 title: 'Error',
                 text: 'El número de personas debe estar entre 1 y 100.',
+            });
+            return false;
+        }
+        return true;
+    }
+    validarDuracion():boolean{
+        if(this.peliculaModal.duracion < 1 || this.peliculaModal.duracion > 300){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'La duración debe estar entre 1 y 300 minutos.',
             });
             return false;
         }
@@ -151,5 +175,4 @@ export class EjDosComponent {
             }
         });
     }
-    
 }

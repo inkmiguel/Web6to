@@ -14,6 +14,7 @@ import {
 @Component({
   selector: 'examen1',
   templateUrl: './index.html',
+  styleUrls: ['./style.css'],
 })
 export class Examen1Component {
   constructor() {}

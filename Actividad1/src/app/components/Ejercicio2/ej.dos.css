@@ -1,9 +1,7 @@
-.aprobada {
-  background-color: #d4edda !important; /* Verde claro */
-  color: #155724 !important; /* Verde oscuro para texto */
+.aprobada td {
+  background-color: rgb(0, 255, 60) !important; /* Verde claro */
 }
 
-.rechazada {
-  background-color: #f8d7da !important; /* Rojo claro */
-  color: #721c24 !important; /* Rojo oscuro para texto */
+.rechazada td {
+  background-color: #e5192a !important; /* Rojo claro */
 }
