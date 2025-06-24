@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { pelicula } from "src/app/estructuras/general";
 import Swal from "sweetalert2";
 import { Firestore, collection, collectionData, doc, query, setDoc, where, deleteDoc, orderBy } from "@angular/fire/firestore";
+import { usuario } from "src/app/estructuras/usuario";
 
 
 @Component({
@@ -14,9 +15,11 @@ export class EjDosComponent {
     listaPeliculas:pelicula[] = [];
     coleccionPelicula = collection(this.firestore,'Pelicula');
     filtradoEstatus: string = '';
+    getterUser: usuario = new usuario();
 
     constructor(private firestore: Firestore){
         this.limpiarFiltro();
+        this.getterUser = history.state as usuario;
     }
     registrarPelicula(){
         if(!this.validarCamposVacios()){

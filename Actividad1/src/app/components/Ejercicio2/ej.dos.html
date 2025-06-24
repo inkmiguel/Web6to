@@ -1,7 +1,11 @@
+<div>
+  <label for="">Bienvenido {{getterUser.userName}}</label>
+</div>
+
 <!-- Botón para abrir el formulario -->
  <div class="d-grid gap-2">
   <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrirFormulario()">
-    Abrir Formulario
+    Registrar Película
   </button>
 </div>
 
@@ -130,7 +134,7 @@
 
 
 <table class="table table-bordered">
-  <thead class="table-dark">
+  <thead id="tablaEncabezado">
     <tr>
       <th scope="col">Película</th>
       <th scope="col">Horario</th>

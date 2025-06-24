@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import Swal from 'sweetalert2';
 import {
   Firestore,
   collection,
@@ -9,33 +8,81 @@ import {
   setDoc,
   where,
   deleteDoc,
+  orderBy,
 } from '@angular/fire/firestore';
+import { ExamenInterface } from 'src/app/estructuras/general.ex';
 
 @Component({
-  selector: 'examen1',
+  selector: 'Examen1',
   templateUrl: './index.html',
   styleUrls: ['./style.css'],
 })
 export class Examen1Component {
-  constructor() {}
+  alumnoModal: ExamenInterface = new ExamenInterface();
+  listaAlunnos: ExamenInterface[] = [];
+  coleccionAlumnos = collection(this.firestore, 'Alumnos');
+  filtradoEstatus: string = '';
 
-  activarAlerta() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-        });
-      }
+  constructor(private firestore: Firestore) {
+    this.limpiarFiltro();
+  }
+
+  registrarAlumno() {
+    this.alumnoModal.id = this.generarID(15);
+    const ruta = doc(this.firestore, 'Alumnos', this.alumnoModal.id);
+    setDoc(ruta, JSON.parse(JSON.stringify(this.alumnoModal))).then(() => {
+      this.alumnoModal = new ExamenInterface();
+      document.getElementById('cerrarModal')?.click();
+      this.limpiarFiltro();
     });
+  }
+
+  editarPelicula() {
+    const ruta = doc(this.firestore, 'Alumnos', this.alumnoModal.id);
+    setDoc(ruta, JSON.parse(JSON.stringify(this.alumnoModal))).then(() => {
+      this.alumnoModal = new ExamenInterface();
+      document.getElementById('cerrarModal')?.click();
+      this.limpiarFiltro();
+    });
+  }
+
+  eliminarPelicula(getAlumnos: ExamenInterface) {
+    const ruta = doc(this.firestore, 'Alumnos', getAlumnos.id); // CORREGIDO
+    deleteDoc(ruta).then(() => {
+      this.alumnoModal = new ExamenInterface();
+      document.getElementById('cerrarModal')?.click();
+      this.limpiarFiltro();
+    });
+  }
+
+  abrirFormulario() {
+    this.alumnoModal = new ExamenInterface();
+    this.alumnoModal.edicion = false;
+  }
+
+  generarID(tamaño: number) {
+    const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    let id = '';
+    for (let i = 0; i < tamaño; i++) {
+      id += letras.charAt(Math.floor(Math.random() * letras.length));
+    }
+    return id;
+  }
+
+  limpiarFiltro() {
+    const consulta = query(this.coleccionAlumnos, orderBy('apellido', 'asc'));
+    collectionData(consulta).subscribe((listaAlunnos) => {
+      this.listaAlunnos = [];
+      listaAlunnos.forEach((alum) => {
+        const elemento = new ExamenInterface();
+        elemento.llenarCampos(alum);
+        this.listaAlunnos.push(elemento);
+      });
+    });
+  }
+
+  // Futuro uso
+  listaAspirantes() {
+    // Por implementar si se requiere filtrado adicional
   }
 }

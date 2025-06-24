@@ -1,3 +1,133 @@
-<button (click)="activarAlerta()">
-    Mostrar Alerta
-</button>
+<!-- Botón para abrir el modal -->
+<div class="d-grid gap-2 mb-3">
+  <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#datos" (click)="abrirFormulario()">
+    Abrir Formulario
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="datos" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Encabezado del modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Formulario para selección de alumno</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" id="cerrarModal"></button>
+      </div>
+
+      <!-- Cuerpo del modal con scroll -->
+      <div class="modal-body px-4" style="max-height: 70vh; overflow-y: auto;">
+        <div class="row g-3">
+
+          <!-- Nombre -->
+          <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" placeholder="Ej. Miguel" [(ngModel)]="alumnoModal.nombre">
+          </div>
+
+          <!-- Apellido -->
+          <div class="col-md-6">
+            <label class="form-label">Apellido</label>
+            <input type="text" class="form-control" placeholder="Ej. Padilla" [(ngModel)]="alumnoModal.apellido">
+          </div>
+
+          <!-- Experiencia -->
+          <div class="col-md-4">
+            <label class="form-label">Experiencia (años)</label>
+            <input type="number" class="form-control" [(ngModel)]="alumnoModal.experiencia">
+          </div>
+
+          <!-- Fecha -->
+          <div class="col-md-4">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-control" [(ngModel)]="alumnoModal.fecha">
+          </div>
+
+          <!-- Municipio -->
+          <div class="col-md-4">
+            <label class="form-label">Municipio</label>
+            <select class="form-select" [(ngModel)]="alumnoModal.municipiio">
+              <option value="Altamira">Altamira</option>
+              <option value="Tampico">Tampico</option>
+              <option value="Madero">Madero</option>
+            </select>
+          </div>
+
+          <!-- Edad -->
+          <div class="col-md-4">
+            <label class="form-label">Edad</label>
+            <input type="number" class="form-control" [(ngModel)]="alumnoModal.edad">
+          </div>
+
+          <!-- Estatus -->
+          <div class="col-md-4">
+            <label class="form-label">Estatus</label>
+            <input type="text" class="form-control" [(ngModel)]="alumnoModal.estatus">
+          </div>
+
+          <!-- Puesto -->
+          <div class="col-md-4">
+            <label class="form-label">Puesto</label>
+            <input type="text" class="form-control" [(ngModel)]="alumnoModal.puesto">
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie del modal -->
+      <div class="modal-footer">
+        <!-- Botón eliminar -->
+        <button class="btn btn-danger" *ngIf="alumnoModal.edicion" (click)="eliminarPelicula(alumnoModal)">
+          <i class="bi bi-trash3"></i>
+        </button>
+
+        <!-- Botón registrar -->
+        <button class="btn btn-success" *ngIf="!alumnoModal.edicion" (click)="registrarAlumno()">
+          <i class="bi bi-floppy"></i> Registrar Alumno
+        </button>
+
+        <!-- Botón guardar cambios -->
+        <button class="btn btn-success" *ngIf="alumnoModal.edicion" (click)="editarPelicula()">
+          Guardar cambios del alumno
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Tabla de alumnos -->
+<table class="table table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Experiencia</th>
+      <th>Fecha</th>
+      <th>Municipio</th>
+      <th>Edad</th>
+      <th>Puesto</th>
+      <th>Estatus</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let alumno of listaAlunnos; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ alumno.nombre }}</td>
+      <td>{{ alumno.apellido }}</td>
+      <td>{{ alumno.experiencia }}</td>
+      <td>{{ alumno.fecha }}</td>
+      <td>{{ alumno.municipiio }}</td>
+      <td>{{ alumno.edad }}</td>
+      <td>{{ alumno.puesto }}</td>
+      <td>{{ alumno.estatus }}</td>
+      <td>
+        <button class="btn btn-sm btn-danger" (click)="eliminarPelicula(alumno)">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

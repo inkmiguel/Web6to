@@ -1,0 +1,6 @@
+.aceptado td{
+    background-color: green;
+}
+.rechazado td{
+    background-color: red;
+}

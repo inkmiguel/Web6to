@@ -5,3 +5,7 @@
 .rechazada td {
   background-color: #e5192a !important; /* Rojo claro */
 }
+#tablaEncabezado{
+  --bs-table-bg: #e5192a;
+  --bs-table-color: white;
+}

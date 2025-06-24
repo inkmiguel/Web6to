@@ -1,0 +1,22 @@
+<div class="row" style="background-color: blue;">
+    <div class="col-12 d-flex justify-content-center" style="margin-top: 5%; margin-bottom: 10%;">
+        <div class="card" style="align-items: center;">
+            <img src="https://pbs.twimg.com/media/GuJ1DT0WcAAY9t2.jpg" class="card-img-top" alt="..." width="50%">
+            <div class="card-body">
+                <h5 class="card-title">Login de la cuenta</h5>
+                <br>
+                <div>
+                    <input class="form-control" type="text" placeholder="email" [(ngModel)]="usuario.email">
+                </div>
+                <br>
+                <div>
+                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="usuario.password">
+                </div>
+                <br>
+                <button class="btn btn-info" (click)="login()">
+                    Iniciar sesión
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
