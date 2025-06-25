@@ -8,10 +8,13 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PruebaComponent } from './components/prueba';
-import { EjDosComponent } from './components/Ejercicio2/ej.dos';
-import { Examen1Component } from './components/Examen1/script';
-import { loginComponent } from './components/login/login';
+
+import {
+  PruebaComponent,
+  EjDosComponent,
+  Examen1Component,
+  loginComponent
+} from './components/barril';
 
 
 @NgModule({
