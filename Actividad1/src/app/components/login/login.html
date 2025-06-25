@@ -6,11 +6,11 @@
                 <h5 class="card-title">Login de la cuenta</h5>
                 <br>
                 <div>
-                    <input class="form-control" type="text" placeholder="email" [(ngModel)]="usuario.email">
+                    <input id="gettingEmail" class="form-control" type="text" placeholder="email" [(ngModel)]="usuario.email">
                 </div>
                 <br>
                 <div>
-                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="usuario.password">
+                    <input id="gettingPassword" type="password" class="form-control" placeholder="Password" [(ngModel)]="usuario.password">
                 </div>
                 <br>
                 <button class="btn btn-info" (click)="login()">
