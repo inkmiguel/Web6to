@@ -19,7 +19,17 @@ export class EjDosComponent {
 
     constructor(private firestore: Firestore){
         this.limpiarFiltro();
-        this.getterUser = history.state as usuario;
+        // Cambiar history.state.user por history.state directamente
+        if(history.state != "" && history.state != undefined && history.state.id) { 
+            localStorage.setItem('user', JSON.stringify(history.state));
+            this.getterUser = history.state; // Asignar directamente
+        } else {
+            // Si no hay datos en history.state, intentar cargar desde localStorage
+            const storedUser = localStorage.getItem('user');
+            if(storedUser) {
+                this.getterUser = JSON.parse(storedUser);
+            }
+        }
     }
     registrarPelicula(){
         if(!this.validarCamposVacios()){

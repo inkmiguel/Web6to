@@ -15,6 +15,7 @@ import {
   Examen1Component,
   loginComponent
 } from './components/barril';
+import { navbar } from './components/navbar/script';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {
     PruebaComponent,
     EjDosComponent,
     Examen1Component,
-    loginComponent
+    loginComponent,
+    navbar
   ],
   imports: [
     BrowserModule,

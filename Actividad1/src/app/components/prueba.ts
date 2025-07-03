@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { images } from 'src/imgs/images';
+
 
 @Component({
   selector: 'prueba',
@@ -10,6 +12,7 @@ export class PruebaComponent {
   arreglo: string[] = new Array();
   cheves: boolean = true;
   status: string = 'fase1';
+  images = images.ganador;
 
   constructor(){
     this.texto = 'Hola mundo desde Angular';

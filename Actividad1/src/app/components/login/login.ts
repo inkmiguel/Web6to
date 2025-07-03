@@ -2,8 +2,9 @@ import { Component } from "@angular/core";
 import { pelicula } from "src/app/estructuras/general";
 import { Firestore, collection, collectionData, doc, query, setDoc, where, deleteDoc, orderBy } from "@angular/fire/firestore";
 import { usuario } from "src/app/estructuras/usuario";
-import { Route, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { alerts } from "src/app/plugins/alerts";
+import { images } from "src/imgs/images";
 
 @Component({
     selector: 'login',
@@ -13,6 +14,7 @@ import { alerts } from "src/app/plugins/alerts";
 export class loginComponent {
     public usuario: usuario;
     usuarioDB = collection(this.firestore, 'usuarios')
+    imagesLogin = images.personaCurry;
 
     constructor(private firestore: Firestore, private redirectio: Router){
         this.usuario = new usuario();
@@ -38,7 +40,10 @@ export class loginComponent {
                 },2000);
                 return;
             }
-            return alerts.error('Usuario no encontrado', 'Por favor verifica tus credenciales');
+            else{
+                this.usuario = new usuario();
+                return alerts.error('Usuario no encontrado', 'Por favor verifica tus credenciales');
+            }
         })
     }
     validEmail(){
